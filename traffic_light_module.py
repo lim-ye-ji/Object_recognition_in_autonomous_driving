@@ -61,12 +61,12 @@ def green(img,X,Y,W,H):
         for a in position:
             interval_x = int(a[2] / 10)
             interval_y = int(a[3] / 10)
-
-            real3 = B[a[1] - interval_y:a[1] + a[3] + interval_y,\
-                    X + a[0] - 2 * a[2] - interval_x:X + a[0] + a[2] + interval_x]
-            print(img +'///G' + str(N_1) + '.jpg')
-            cv2.imwrite(path_g + str(N_1) + '.jpg', real3)
-            N_1 = N_1 + 1
+            if a[1] - interval_y > 0 and X + a[0] - 2 * a[2] - interval_x > 0:
+                real3 = B[a[1] - interval_y:a[1] + a[3] + interval_y,\
+                        X + a[0] - 2 * a[2] - interval_x:X + a[0] + a[2] + interval_x]
+                print(img +'///G' + str(N_1) + '.jpg')
+                cv2.imwrite(path_g + str(N_1) + '.jpg', real3)
+                N_1 = N_1 + 1
 
 ##############
 
@@ -118,12 +118,12 @@ def yellow(img,X,Y,W,H):
         for a in position:
             interval_x = int(a[2] / 10)
             interval_y = int(a[3] / 10)
-
-            real3 = B[a[1] - interval_y:a[1] + a[3] + interval_y,
-                    X + a[0] - a[2] - interval_x:X + a[0] + 2*a[2] + interval_x]
-            print(img + '///Y' + str(N_2) + '.jpg')
-            cv2.imwrite(path_y + str(N_2) + '.jpg', real3)
-            N_2 = N_2 + 1
+            if a[1] - interval_y > 0 and X + a[0] - a[2] - interval_x > 0:
+                real3 = B[a[1] - interval_y:a[1] + a[3] + interval_y,
+                        X + a[0] - a[2] - interval_x:X + a[0] + 2*a[2] + interval_x]
+                print(img + '///Y' + str(N_2) + '.jpg')
+                cv2.imwrite(path_y + str(N_2) + '.jpg', real3)
+                N_2 = N_2 + 1
 
 ############
 
@@ -175,12 +175,12 @@ def red(img,X,Y,W,H):
         for a in position:
             interval_x = int(a[2] / 10)
             interval_y = int(a[3] / 10)
-
-            real3 = B[a[1] - interval_y:a[1] + a[3] + interval_y,
-                    X + a[0] - interval_x:X + a[0] + 3*a[2] + interval_x]
-            print(img + '///R' + str(N_3) + '.jpg')
-            cv2.imwrite(path_r + str(N_3) + '.jpg', real3)
-            N_3 = N_3 + 1
+            if a[1] - interval_y > 0 and X + a[0] - interval_x > 0:
+                real3 = B[a[1] - interval_y:a[1] + a[3] + interval_y,
+                        X + a[0] - interval_x:X + a[0] + 3*a[2] + interval_x]
+                print(img + '///R' + str(N_3) + '.jpg')
+                cv2.imwrite(path_r + str(N_3) + '.jpg', real3)
+                N_3 = N_3 + 1
     else:
         ## 빨강색 부분 추출2
         # 다시 hsv 영역 전환
@@ -221,9 +221,9 @@ def red(img,X,Y,W,H):
             for a in position:
                 interval_x = int(a[2] / 10)
                 interval_y = int(a[3] / 10)
-
-                real3 = B[a[1] - interval_y:a[1] + a[3] + interval_y,
-                        X + a[0] - interval_x:X + a[0] + 3*a[2] + interval_x]
-                print(img + '///R' + str(N_3) + '.jpg')
-                cv2.imwrite(path_r + str(N_3) + '.jpg', real3)
-                N_3 = N_3 + 1
+                if a[1] - interval_y > 0 and X + a[0] - interval_x > 0:
+                    real3 = B[a[1] - interval_y:a[1] + a[3] + interval_y,
+                            X + a[0] - interval_x:X + a[0] + 3*a[2] + interval_x]
+                    print(img + '///R' + str(N_3) + '.jpg')
+                    cv2.imwrite(path_r + str(N_3) + '.jpg', real3)
+                    N_3 = N_3 + 1
