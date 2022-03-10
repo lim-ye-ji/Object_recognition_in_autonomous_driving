@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 from traffic_light_module import *
 
@@ -9,8 +10,14 @@ light_list = os.listdir(path)
 for img in light_list:
     if img == ".DS_Store":
         continue
+        
     # ROI 지정, x,y,w,h ,N 설정 완료
-    green(path+img, X=100, Y=0, W=1000, H=500)
-    yellow(path+img, X=100, Y=0, W=1000, H=500)
-    red(path+img, X=100, Y=0, W=1000, H=500)
+    x1 = 300
+    y1 = 0
+    w1 = 1400
+    h1 = 500
+    
+    green(path+img, X = x1, Y = y1, W = w1, H = h1)
+    yellow(path+img, X = x1, Y = y1, W = w1, H = h1)
+    red(path+img, X = x1, Y = y1, W = w1, H = h1)
 
