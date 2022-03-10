@@ -10,7 +10,7 @@ for img in light_list:
     if img == ".DS_Store":
         continue
     # ROI 지정, x,y,w,h ,N 설정 완료
-    green(path+img, X=100, Y=0, W=1000, H=500)
-    yellow(path+img, X=100, Y=0, W=1000, H=500)
-    red(path+img, X=100, Y=0, W=1000, H=500)
+    green(path+img, X=800, Y=0, W=1000, H=500)
+    yellow(path+img, X=800, Y=0, W=1000, H=500)
+    red(path+img, X=800, Y=0, W=1000, H=500)
 
