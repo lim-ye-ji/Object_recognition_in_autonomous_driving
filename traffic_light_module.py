@@ -86,7 +86,6 @@ def green(img,X,Y,W,H):
                 cv2.imwrite(path_g + str(seq) + '.jpg', real3)
                 seq = seq + 1
 
-# #############
 
 def yellow(img,X,Y,W,H):
     global seq, path_y
@@ -225,6 +224,7 @@ def red(img,X,Y,W,H):
                 print(img + '///R' + str(seq) + '.jpg')
                 cv2.imwrite(path_r + str(seq) + '.jpg', real3)
                 seq = seq + 1
+
     else:
         ## 빨강색 부분 추출2
         # 다시 hsv 영역 전환
