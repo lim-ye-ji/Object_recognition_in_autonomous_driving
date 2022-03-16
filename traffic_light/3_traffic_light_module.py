@@ -44,7 +44,7 @@ def green(path1, img1, X, Y, W, H, first_detect, path_g):
 
     ## 모폴 침식 사용
     # 구조화 요소 커널, 사각형 (2x2) 생성
-    k = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+    k = cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2))
     
     # 열림 연산 적용 # yjlim 추가
     erosion1 = cv2.morphologyEx(roi2_result, cv2.MORPH_OPEN, k)
@@ -68,7 +68,6 @@ def green(path1, img1, X, Y, W, H, first_detect, path_g):
     position = []
     contours, hierarchy = cv2.findContours(erosion3, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    
     for cnt in contours:
         x, y, w, h = cv2.boundingRect(cnt)
         # cnt를 일일이 확인해서 좌표상으로 크게 차이 안나는 것들(잡음)은 추가안함(너무 작은 직사각형, 한쪽으로 길쭉한 직사각형 제외)
@@ -177,6 +176,7 @@ def yellow(path1, img1, X, Y, W, H, first_detect, path_y):
 
 # ## RED
 
+# +
 def red(path1, img1, X, Y, W, H, first_detect, path_r):
     global seq
     
@@ -197,14 +197,25 @@ def red(path1, img1, X, Y, W, H, first_detect, path_r):
     up = (10, 255, 255)
 
     roi2_mask = cv2.inRange(roi2_hsv, low, up)
-    roi2_result = cv2.bitwise_and(roi2, roi2, mask=roi2_mask)
+    roi2_result = cv2.bitwise_and(roi2, roi2, mask = roi2_mask)
+    
+    # 색 영역 두번째 추가
+    low3 = (150, 40, 50)
+    up3 = (180, 255, 255)
+    
+    roi3_mask = cv2.inRange(roi2_hsv, low3, up3)
+    roi3_result = cv2.bitwise_and(roi2, roi2, mask = roi3_mask)
+    
+    # 색 영역 1 + 색 영역 2  
+    result_red = roi2_result + roi3_result
+    
 
     ## 모폴 침식 사용
     # 구조화 요소 커널, 사각형 (2x2) 생성
     k = cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2))
     
     # 열림 연산 적용 # yjlim 추가
-    erosion1 = cv2.morphologyEx(roi2_result, cv2.MORPH_OPEN, k)
+    erosion1 = cv2.morphologyEx(result_red, cv2.MORPH_OPEN, k)
     
     # 침식 연산 적용
     erosion = cv2.erode(roi2_result, k)
@@ -253,6 +264,7 @@ def red(path1, img1, X, Y, W, H, first_detect, path_r):
                 first_detect.append([[a[1] - interval_y, a[1] + a[3] + interval_y, X + a[0] - interval_x, X + a[0] + 3 * length + interval_x], name[0] + '_' + str(seq)])
                 seq = seq + 1
 
+'''
     else:
         ## 빨강색 부분 추출2
         # 다시 hsv 영역 전환
@@ -313,5 +325,7 @@ def red(path1, img1, X, Y, W, H, first_detect, path_r):
                     cv2.imwrite(path_r + name[0] + '_' + str(seq) + '.jpg', real3)
                     first_detect.append([[a[1] - interval_y, a[1] + a[3] + interval_y, X + a[0] - interval_x, X + a[0] + 3 * length + interval_x],name[0]+'_'+str(seq)])
                     seq = seq + 1
+'''
+# -
 
 
